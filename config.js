@@ -27,14 +27,10 @@ module.exports = {
   "misMatchThreshold": 0,
   "requireSameDimensions": false,
   "scenarios": [
-    {
-      "label": environment + ": Homepage",
-      "url": domain
-    },
-    {
-      "label": environment + ": Dataset",
-      "url": domain + "/dataset"
-    }
+    { "label": environment + ": Homepage", "url": domain },
+    { "label": environment + ": Datasets", "url": `${domain}/datasets` },
+    { "label": environment + ": Specific publisher selected", "url": `${domain}/publisher/b1472b4f-b8c8-4ac2-9701-76995445f99b?tags=OpenData&tags=Land+use` },
+    { "label": environment + ": Specific page viewed", "url": `${domain}/dataset/national-historic-landscape-characterisation-250m-grid-england` },
   ],
   "paths": {
     "bitmaps_reference": "backstop_data/bitmaps_reference",
