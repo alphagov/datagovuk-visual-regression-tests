@@ -1,0 +1,22 @@
+{
+  "name": "data-gov-uk-visual-regression-test-app",
+  "version": "3.0.1",
+  "description": "Visual regression testing app with login for the data.gov.uk",
+  "scripts": {
+    "approve": "backstop approve --configPath=config.js",
+    "test": "backstop test --configPath=config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alphagov/digitalmarketplace-visual-regression.git"
+  },
+  "author": "Dilwoar Hussain",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alphagov/digitalmarketplace-visual-regression/issues"
+  },
+  "homepage": "https://github.com/alphagov/digitalmarketplace-visual-regression#readme",
+  "devDependencies": {
+    "backstopjs": "^4.5.0"
+  }
+}
