@@ -33,10 +33,10 @@ module.exports = {
     { "label": environment + ": Specific page viewed", "url": `${domain}/dataset/national-historic-landscape-characterisation-250m-grid-england` },
   ],
   "paths": {
-    "bitmaps_reference": "backstop_data/bitmaps_reference",
-    "bitmaps_test": "backstop_data/bitmaps_test",
-    "engine_scripts": "backstop_data/engine_scripts/puppeteer",
-    "html_report": "backstop_data/html_report"
+    "bitmaps_reference": "./backstop_data/bitmaps_reference",
+    "bitmaps_test": "./backstop_data/bitmaps_test",
+    "engine_scripts": "./backstop_data/engine_scripts/puppeteer",
+    "html_report": "./backstop_data/html_report"
   },
   "report": [],
   "engine": "puppeteer",
