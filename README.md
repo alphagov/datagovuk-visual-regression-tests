@@ -1,3 +1,5 @@
+![Node.js CI](https://github.com/alphagov/datagovuk-visual-regression-tests/workflows/Node.js%20CI/badge.svg)
+
 # DATA.GOV.UK - Visual Regression Testing
 This repo contains configuration for BackstopJS.
 
