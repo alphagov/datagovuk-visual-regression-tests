@@ -11,14 +11,15 @@ You'll also need node installed locally.
 
 Clone this repo and run:
 `npm install`
+`npm run approve` # for first time only
 
 ## Running tests locally
 Simply run:
-`npm run test -- --configPath=config.js`
+`npm run test`
 
 With the basic setup as supplied, this will run an initial test on your localhost.  Everything will fail because you don't have any reference screenshots.  To get some references, simply approve your test run:
 
-`npm run approve -- --configPath=config.js`
+`npm run approve`
 
 Now you can happily change your local apps and run tests (with `npm run test`) to make sure you've not broken things!  Everytime you do a good change, simply `npm run approve` to update your reference screenshots.
 
