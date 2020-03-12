@@ -3,7 +3,7 @@ function capitalize(string) {
 }
 
 var environment = capitalize(process.env.DGU_ENVIRONMENT || 'development')
-var domain = process.env.DG_DOMAIN || 'https://ckan.publishing.service.gov.uk'
+var domain = process.env.DG_DOMAIN || 'https://localhost:5000'
 
 module.exports = {
   "id": "backstop_data_gov_uk",
