@@ -23,6 +23,7 @@ module.exports = {
   ],
   "misMatchThreshold": 0,
   "requireSameDimensions": false,
+  "onReadyScript": "login",
   "scenarios": [
     { "label": environment + ": Homepage", "url": process.env.DOMAIN },
     { "label": environment + ": Datasets", "url": `${process.env.DOMAIN}/dataset` },
