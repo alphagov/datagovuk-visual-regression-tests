@@ -25,8 +25,8 @@ module.exports = {
   "requireSameDimensions": false,
   "onReadyScript": "login",
   "scenarios": [
-    { "label": environment + ": Homepage", "url": process.env.DOMAIN },
-    { "label": environment + ": Datasets", "url": `${process.env.DOMAIN}/dataset` },
+    { "label": "homepage", "url": process.env.DOMAIN },
+    { "label": "Datasets", "url": `${process.env.DOMAIN}/dataset` },
   ],
   "paths": {
     "bitmaps_reference": "./backstop_data/bitmaps_reference",
