@@ -26,8 +26,6 @@ module.exports = {
   "scenarios": [
     { "label": environment + ": Homepage", "url": process.env.DOMAIN },
     { "label": environment + ": Datasets", "url": `${process.env.DOMAIN}/dataset` },
-    { "label": environment + ": Specific publisher selected", "url": `${process.env.DOMAIN}/publisher/b1472b4f-b8c8-4ac2-9701-76995445f99b?tags=OpenData&tags=Land+use` },
-    { "label": environment + ": Specific page viewed", "url": `${process.env.DOMAIN}/dataset/national-historic-landscape-characterisation-250m-grid-england` },
   ],
   "paths": {
     "bitmaps_reference": "./backstop_data/bitmaps_reference",
