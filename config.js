@@ -23,9 +23,9 @@ module.exports = {
   ],
   "misMatchThreshold": 0,
   "requireSameDimensions": false,
-  "onReadyScript": "login",
+  "onReadyScript": "login.js",
   "scenarios": [
-    { "label": "homepage", "url": process.env.DOMAIN },
+    { "label": "homepage", "url": process.env.DOMAIN, "onReadyScript": "homepage.js" },
     { "label": "Datasets", "url": `${process.env.DOMAIN}/dataset` },
   ],
   "paths": {
