@@ -20,5 +20,5 @@ module.exports = async (page, scenario) => {
         page.waitForNavigation()
     ]);
 
-    console.log(`Pre-test script complete for scenario ${scenario.label}`);
+    console.log(`Login script complete for scenario ${scenario.label}`);
 };

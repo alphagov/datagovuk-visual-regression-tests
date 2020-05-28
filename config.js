@@ -36,8 +36,8 @@ module.exports = {
     { "label": "add new resource", "url": `${process.env.DOMAIN}/dataset/new_resource/example-dataset-number-one` },
     { "label": "view resource", "url": `${process.env.DOMAIN}/dataset/example-dataset-number-one/resource/1c217a07-21f1-4e98-b4fa-f9d6009f4151` },
     { "label": "edit resource", "url": `${process.env.DOMAIN}/dataset/example-dataset-number-one/resource_edit/1c217a07-21f1-4e98-b4fa-f9d6009f4151` },
-    { "label": "edit organogram resource: no source", "url": `${process.env.DOMAIN}/dataset/organogram-test/resource_edit/f2486156-97f3-4230-a882-1f8912521875` },
-    { "label": "edit organogram resource: source specified", "url": `${process.env.DOMAIN}/dataset/organogram-test/resource_edit/9456cb97-17f5-4088-a657-7a5d496aef21` },
+    { "label": "edit organogram resource: no source", "url": `${process.env.DOMAIN}/dataset/organogram-test/resource_edit/f2486156-97f3-4230-a882-1f8912521875`, "onReadyScript": "dataset/organogram.js" },
+    { "label": "edit organogram resource: source specified", "url": `${process.env.DOMAIN}/dataset/organogram-test/resource_edit/9456cb97-17f5-4088-a657-7a5d496aef21`, "onReadyScript": "dataset/organogram.js" },
   ],
   "paths": {
     "bitmaps_reference": "./backstop_data/bitmaps_reference",
