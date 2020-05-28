@@ -29,7 +29,6 @@ module.exports = {
     { "label": "add new dataset: form errors", "url": `${process.env.DOMAIN}/dataset/new`, "onReadyScript": "utils/form-errors.js" },
     { "label": "view dataset", "url": `${process.env.DOMAIN}/dataset/example-dataset-number-one`},
     { "label": "edit dataset", "url": `${process.env.DOMAIN}/dataset/edit/example-dataset-number-one`},
-    { "label": "edit dataset: form errors", "url": `${process.env.DOMAIN}/dataset/edit/example-dataset-number-one`, "onReadyScript": "utils/form-errors.js" },
     { "label": "view resources for a dataset", "url": `${process.env.DOMAIN}/dataset/resources/example-dataset-number-one` },
     { "label": "add new resource", "url": `${process.env.DOMAIN}/dataset/new_resource/example-dataset-number-one` },
     { "label": "view resource", "url": `${process.env.DOMAIN}/dataset/example-dataset-number-one/resource/1c217a07-21f1-4e98-b4fa-f9d6009f4151` },
