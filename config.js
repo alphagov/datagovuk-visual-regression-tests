@@ -53,6 +53,13 @@ module.exports = {
     { "label": "view user datasets", "url": `${process.env.DOMAIN}/user/default` },
     { "label": "view user activity", "url": `${process.env.DOMAIN}/user/activity/default` },
     { "label": "edit user", "url": `${process.env.DOMAIN}/user/edit/default` },
+    { "label": "login", "url": `${process.env.DOMAIN}/user/login`, "onReadyScript": "user/skip-login.js" },
+    { "label": "login: user alreadt logged in", "url": `${process.env.DOMAIN}/user/login` },
+    { "label": "logged out", "url": `${process.env.DOMAIN}/user/logged_out_redirect`, "onReadyScript": "user/skip-login.js" },
+    { "label": "regster for an account", "url": `${process.env.DOMAIN}/user/regster`, "onReadyScript": "user/skip-login.js" },
+    { "label": "ckan admin users list", "url": `${process.env.DOMAIN}/ckan-admin` },
+    { "label": "ckan instance configuration", "url": `${process.env.DOMAIN}/ckan-admin/config` },
+    { "label": "ckan data trash", "url": `${process.env.DOMAIN}/ckan-admin/trash` },
   ],
   "paths": {
     "bitmaps_reference": "./backstop_data/bitmaps_reference",
