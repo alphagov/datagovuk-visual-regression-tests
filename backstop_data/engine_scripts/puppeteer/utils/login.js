@@ -20,5 +20,10 @@ module.exports = async (page, scenario) => {
         page.waitForNavigation()
     ]);
 
+    if (await page.$('#flDebugToolbar') !== null) {
+        console.log('closing ckan admin toolbar for homepage testing...');
+        await page.click('#flHideToolBarButton');
+    }
+
     console.log(`Login script complete for scenario ${scenario.label}`);
 };

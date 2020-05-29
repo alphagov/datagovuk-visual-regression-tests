@@ -23,7 +23,7 @@ module.exports = {
   "requireSameDimensions": false,
   "onReadyScript": "utils/login.js",
   "scenarios": [
-    { "label": "homepage", "url": process.env.DOMAIN, "onReadyScript": "homepage.js" },
+    { "label": "homepage", "url": process.env.DOMAIN },
     { "label": "datasets", "url": `${process.env.DOMAIN}/dataset` },
     { "label": "add new dataset", "url": `${process.env.DOMAIN}/dataset/new` },
     { "label": "add new dataset: form errors", "url": `${process.env.DOMAIN}/dataset/new`, "onReadyScript": "utils/form-errors.js" },
