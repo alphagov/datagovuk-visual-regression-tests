@@ -32,6 +32,21 @@ npm run approve
 
 Now you can happily change your local apps and run tests (with `npm run test`) to make sure you've not broken things! Every time you make a positive change, simply run `npm run approve` to update your reference screenshots.
 
+Running the default `test` command will run 37 scenarios, each one with 3 views (desktop, tablet and phone), amounting to 111 screenshots. This will take a while to run all of these and may start eating into your machine's memory in a non-trivial way. To subvert this, scenarios are broken down into the following sections:
+
+- Homepage - 1 scenario
+- Dataset - 11 scenarios
+- Publisher - 5 scenarios
+- Harvest - 9 scenarios
+- User - 8 scenarios
+- Admin - 3 scenarios
+
+You can use these section keywords to only target specific scenarios using the command `npm run test:[keyword]`. For example, to only test the harvest section, simply run `npm run test:harvest` to only run those 9 scenarios. You can similarly target a single scenario or however many you want by passing the `filter` flag with some targetting regex for the scenario label(s) directly to the `test` script, like so:
+
+```
+npm run test -- --filter=[your specific scenario]
+```
+
 For running ckan locally, it is recommended you use the [docker-ckan project](https://github.com/alphagov/docker-ckan). Please see the documentation for that project for details on how to run ckan locally via docker.
 
 ## Updating tests
