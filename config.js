@@ -49,6 +49,10 @@ module.exports = {
     { "label": "harvest source last job report", "url": `${process.env.DOMAIN}/harvest/mock-harvest-source/job/last` },
     { "label": "harvest source jobs list", "url": `${process.env.DOMAIN}/harvest/mock-harvest-source/job` },
     { "label": "edit harvest source", "url": `${process.env.DOMAIN}/harvest/edit/mock-harvest-source` },
+    { "label": "users", "url": `${process.env.DOMAIN}/user` },
+    { "label": "view user datasets", "url": `${process.env.DOMAIN}/user/default` },
+    { "label": "view user activity", "url": `${process.env.DOMAIN}/user/activity/default` },
+    { "label": "edit user", "url": `${process.env.DOMAIN}/user/edit/default` },
   ],
   "paths": {
     "bitmaps_reference": "./backstop_data/bitmaps_reference",
