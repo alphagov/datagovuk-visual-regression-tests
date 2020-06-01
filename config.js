@@ -21,6 +21,7 @@ module.exports = {
   ],
   "misMatchThreshold": 0,
   "requireSameDimensions": false,
+  "onBeforeScript": "onBefore.js",
   "onReadyScript": "utils/login.js",
   "scenarios": [
     { "label": "Homepage - default", "url": process.env.DOMAIN },
