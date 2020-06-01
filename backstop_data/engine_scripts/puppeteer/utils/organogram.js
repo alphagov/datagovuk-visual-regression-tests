@@ -1,8 +1,4 @@
-const login = require('../utils/login');
-
-module.exports = async (page, scenario) => {
-    await login(page, scenario);
-
+module.exports = async (page) => {
     console.log('Waiting for organogram DOM elements to render...');
     await page.waitForSelector('.btn-remove-url');
 };

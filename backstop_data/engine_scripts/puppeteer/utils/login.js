@@ -1,9 +1,12 @@
 require('dotenv').config();
 
-module.exports = async (page, scenario) => {
-    console.log(`Running scenario: ${scenario.label}. Logging in...`);
+module.exports = async (page, scenario, label) => {
+    console.log(`Logging in for scenario ${label}...`);
 
-    await page.goto(`${process.env.DOMAIN}/user/login`);
+    await Promise.all([
+        page.goto(`${process.env.DOMAIN}/user/login`),
+        page.waitForNavigation()
+    ]);
     await page.focus('#field-login');
     await page.keyboard.type(process.env.CKAN_USER);
     await page.focus('#field-password');
@@ -13,17 +16,10 @@ module.exports = async (page, scenario) => {
         page.waitForNavigation()
     ]);
 
-    console.log(`Scenario ${scenario.label} logged in successfully. Going to page...`);
+    console.log(`Scenario ${label} logged in successfully. Going to page...`);
 
     await Promise.all([
         page.goto(scenario.url),
         page.waitForNavigation()
     ]);
-
-    if (await page.$('#flDebugToolbar') !== null) {
-        console.log('closing ckan admin toolbar for homepage testing...');
-        await page.click('#flHideToolBarButton');
-    }
-
-    console.log(`Login script complete for scenario ${scenario.label}`);
 };
