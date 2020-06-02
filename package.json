@@ -12,7 +12,8 @@
     "test:user": "npm test -- --filter=User - .*",
     "test:admin": "npm test -- --filter=Admin - .*",
     "setup": "node setup/index.js all",
-    "setup:publisher": "node setup/index.js publisher"
+    "setup:publisher": "node setup/index.js publisher",
+    "setup:harvest": "node setup/index.js harvest"
   },
   "repository": {
     "type": "git",
