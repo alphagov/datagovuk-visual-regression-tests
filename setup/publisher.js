@@ -1,12 +1,9 @@
-module.exports = async page => {
-    const testPublisherStatus = async () => {
-        const response = await page.goto(`${process.env.DOMAIN}/publisher/test-publisher`);
-        return response.status();
-    }
+const testPublisherStatus = require('./route-status').publisher;
 
+module.exports = async page => {
     console.log('Creating a test publisher...');
 
-    if (await testPublisherStatus() === 404) {
+    if (await testPublisherStatus(page) === 404) {
         await Promise.all([
             page.goto(`${process.env.DOMAIN}/publisher/new`),
             page.waitForNavigation() 
@@ -25,7 +22,7 @@ module.exports = async page => {
 
         console.log('Checking successful test publisher generation...');
 
-        if (await testPublisherStatus() === 200) {
+        if (await testPublisherStatus(page) === 200) {
             console.log('Test publisher created successfully!');
         } else {
             throw new Error('Unable to verify existence of test publisher after automated creation. Please check that your local instance of docker-ckan is running properly and try again.');
