@@ -17,6 +17,8 @@ npm install
 
 Clone the `.env.example` file and create a `.env` file at the root of your local repo. Fill in the environment variables in accordance with their descriptions in `.env.example`.
 
+If your local ckan doesn't have any data in it, it's recommended that you run `npm run setup`. See the data setup section below for more details.
+
 ## How it works
 BackstopJS runs through scenarios specified in the config.js file at the project root that specifically relate to the admin journeys in ckan. The intent of these tests is to monitor changes between versions of ckan to ensure that the admin frontend hadn't broken. If these admin journeys change at any point, the scenarios in this tool will need to be reviewed.
 
@@ -64,7 +66,20 @@ In addition to the above, you can add the following additional attributes depend
 
 Make sure to review the test report before approving to check nothing else has slipped in, and ensure no-one else triggers a test run between your test and approval.
 
+## Data setup
+In order to ensure that tests are based on consistent data and therefore consistent views, this repo includes a data setup for ckan. This is a simple set of scripts that use puppeteer to mock user interaction, running through routes it expects to exist based on the consistent data and creating data using the interface as a user would. You can access this primarily through `npm run setup` which is an alias for `node setup/index.js all`. Running the setup script with the `all` keyword, as setup in the aforementioned alias` will run all of the following scripts in sequence:
+
+- `npm run setup:publisher`: Creates a simple publisher in your local ckan
+- `npm run setup:harvest`: Creates a harvest source using the [mock harvest source](https://github.com/alphagov/ckan-mock-harvest-sources) URL and triggers the source to generate a dataset with a series of resources
+- `npm run setup:publisher`: Creates an organogram dataset aka: a dataset with it's schema/vocabulary set to one of the 2 "organisation structure" options, and 2 resources: one without a source specified and one with. This is done due to a seperate view being produced in the edit resource page if the dataset it's being built for is an organogram dataset.
+
 ## Gotchas
 In scenarios that involve submitting a form to test for form errors, the ideal would be to use `form.submit()` in line with the browser API. Unfortuantely, ckan's `basic-form` js module hijacks the form submission flow, meaning that the submit button for that form has to be explicitly clicked. This can still be done via puppeteer, however it's not especially neat.
 
-Backstop doesn't have a testing library for IE or Edge. We have a need to support IE11 at least for this project, so you may need to do some additional manual testing on top of running these tests.
+On organogram resource views, ckan's `image-upload` module takes a little while to load and puppeteer manages to beat it 9 times out of 10. The `organogram.js` script has therefore been added to wait for the js to load.
+
+When triggering a harvest job, in the user UI, the user click the "reharvest" button and a modal window pops up to confirm the action. This isn't possible to do in puppeteer cleanly, as puppeteer loads before the modal js can finish loading. The workaround for this has been to click the reharvest button and trigger a page reload via `page.reload()`. This works because we are accessing the page before the modal js can create an artificial barrier to the user carrying out the reharvest action.
+
+On certain views, an admin toolbar is present. This appears to only be visible for super admins and interfere's with being able to properly interrogate screenshots for discrepencies. To remedy this, the script `close-admin-toolbar.js` has been created to manage this on views where it pops up.
+
+Backstop doesn't have a testing library for IE or Edge. The reason for this is that backstop relies on the headless infrastructure provided by engines like puppeteer or caspar, something that old microsoft browsers don't suppert. We have a need to support IE11 at least for this project, so you may need to do some additional manual testing on top of running these tests.
