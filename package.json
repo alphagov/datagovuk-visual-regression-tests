@@ -13,7 +13,8 @@
     "test:admin": "npm test -- --filter=Admin - .*",
     "setup": "node setup/index.js all",
     "setup:publisher": "node setup/index.js publisher",
-    "setup:harvest": "node setup/index.js harvest"
+    "setup:harvest": "node setup/index.js harvest",
+    "setup:organogram": "node setup/index.js organogram"
   },
   "repository": {
     "type": "git",

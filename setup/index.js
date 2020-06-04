@@ -3,6 +3,7 @@ const puppeteer = require('puppeteer');
 const login = require('../backstop_data/engine_scripts/puppeteer/utils/login');
 const publisher = require('./publisher');
 const harvest = require('./harvest');
+const organogram = require('./organogram');
 
 (async () => {
     console.log('Welcome to local data setup for datagovuk visual regression tests. Please ensure that you are running a local instance of docker-ckan and that your environment is clear. Failure to meet these requirements may lead to this script failing and your backstop tests to fail unecessarily.');
@@ -25,6 +26,10 @@ const harvest = require('./harvest');
 
         if (process.argv.indexOf('harvest') !== -1 || process.argv.indexOf('all') !== -1) {
             await harvest(page);
+        }
+
+        if (process.argv.indexOf('organogram') !== -1 || process.argv.indexOf('all') !== -1) {
+            await organogram(page);
         }
     } catch(e) {
         await browser.close();
