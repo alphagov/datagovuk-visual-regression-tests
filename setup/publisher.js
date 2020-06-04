@@ -1,4 +1,4 @@
-const testPublisherStatus = require('./route-status').publisher;
+const testPublisherStatus = require('./utils/route-status').publisher;
 
 module.exports = async page => {
     console.log('Creating a test publisher...');
