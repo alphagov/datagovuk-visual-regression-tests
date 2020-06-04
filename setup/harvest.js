@@ -49,12 +49,7 @@ module.exports = async page => {
         ]);
     
         await page.click('a[data-module="confirm-action"]');
-        await page.waitForSelector('.modal.fade.in');
-        
-        await Promise.all([
-            page.click('.btn-primary'),
-            page.waitForNavigation()
-        ]);
+        await page.reload();
     
         console.log('Checking successful harvest job trigger...');
     
