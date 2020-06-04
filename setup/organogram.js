@@ -39,7 +39,6 @@ module.exports = async page => {
         console.log('Adding resource with a source...');
 
         await waitForORganogramJS(page);
-        await page.click('a[title="Link to a URL on the internet (you can also link to an API)"]');
 
         await page.evaluate(() => {
             document.getElementById('field-name').value = 'Source specified';
