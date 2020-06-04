@@ -5,8 +5,10 @@ const submitForm = require('./utils/submit-form');
 const organogram = require('./utils/organogram');
 
 module.exports = async (page, scenario, vp) => {
+    // Set the label string to be used across config scripts
     const label = `${scenario.label}, ${vp.label}`;
 
+    // Will look for attributes from the config scenario JSON to identify which extra scripts to run
     if (!scenario.skipLogin) {
         await login(page, scenario, label);
     } else {

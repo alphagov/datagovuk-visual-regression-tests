@@ -1,4 +1,4 @@
-require('dotenv').config();
+// Mocks user login into the ckan admin panel UI
 
 module.exports = async (page, scenario, label) => {
     console.log(`Logging in for scenario ${label}...`);
@@ -18,6 +18,7 @@ module.exports = async (page, scenario, label) => {
 
     console.log(`Scenario ${label} logged in successfully. Going to page...`);
 
+    // Go to scenario URL after login
     await Promise.all([
         page.goto(scenario.url),
         page.waitForNavigation()

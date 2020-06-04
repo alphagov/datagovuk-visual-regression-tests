@@ -1,4 +1,3 @@
-require('dotenv').config();
 const testDatasetStatus = require('./utils/route-status').datasetOrganogram;
 const waitForORganogramJS = require('../backstop_data/engine_scripts/puppeteer/utils/organogram');
 const updateEnv = require('./utils/update-env');
