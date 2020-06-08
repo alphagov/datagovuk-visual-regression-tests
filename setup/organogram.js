@@ -1,5 +1,5 @@
 const testDatasetStatus = require('./utils/route-status').datasetOrganogram;
-const waitForORganogramJS = require('../backstop_data/engine_scripts/puppeteer/utils/organogram');
+const waitForOrganogramJS = require('../backstop_data/engine_scripts/puppeteer/utils/upload-field');
 const updateEnv = require('./utils/update-env');
 
 module.exports = async page => {
@@ -38,7 +38,7 @@ module.exports = async page => {
 
         console.log('Adding resource with a source...');
 
-        await waitForORganogramJS(page);
+        await waitForOrganogramJS(page);
 
         await page.evaluate(() => {
             document.getElementById('field-name').value = 'Source specified';

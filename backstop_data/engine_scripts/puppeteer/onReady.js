@@ -2,7 +2,8 @@ require('dotenv').config();
 const login = require('./utils/login');
 const closeAdminToolbar = require('./utils/close-admin-toolbar');
 const submitForm = require('./utils/submit-form');
-const organogram = require('./utils/organogram');
+const uploadField = require('./utils/upload-field');
+const slugPreview = require('./utils/slug-preview');
 
 module.exports = async (page, scenario, vp) => {
     // Set the label string to be used across config scripts
@@ -23,7 +24,11 @@ module.exports = async (page, scenario, vp) => {
         await submitForm(page, label);
     }
 
-    if (scenario.organogram) {
-        await organogram(page);
+    if (scenario.uploadField) {
+        await uploadField(page);
+    }
+
+    if (scenario.slugPreview) {
+        await slugPreview(page);
     }
 };

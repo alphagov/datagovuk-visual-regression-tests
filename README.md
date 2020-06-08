@@ -76,9 +76,11 @@ In order to ensure that tests are based on consistent data and therefore consist
 ## Gotchas
 In scenarios that involve submitting a form to test for form errors, the ideal would be to use `form.submit()` in line with the browser API. Unfortuantely, ckan's `basic-form` js module hijacks the form submission flow, meaning that the submit button for that form has to be explicitly clicked. This can still be done via puppeteer, however it's not especially neat.
 
-On organogram resource views, ckan's `image-upload` module takes a little while to load and puppeteer manages to beat it 9 times out of 10. The `organogram.js` script has therefore been added to wait for the js to load.
+On any view with an upload field, notably the organogram resource views, ckan's `image-upload` module takes a little while to load and puppeteer manages to beat it 9 times out of 10. The `upload-field.js` script has therefore been added to wait for the js to load.
 
-When triggering a harvest job, in the user UI, the user click the "reharvest" button and a modal window pops up to confirm the action. This isn't possible to do in puppeteer cleanly, as puppeteer loads before the modal js can finish loading. The workaround for this has been to click the reharvest button and trigger a page reload via `page.reload()`. This works because we are accessing the page before the modal js can create an artificial barrier to the user carrying out the reharvest action.
+Similar to the above around having to wait for js to load in a view, some forms have an autofill slug field, managed by ckan's `slug-preview` module. This both hides one field and generates markup for a non-input field which auto-updates based on an associated input field. Like above, puppeteer beats the rendering work for this 9 times out of 10, creating inconsistent view tests. The `slug-preview.js` script exists to account for this.
+
+When triggering a harvest job, in the user UI, the user clicks the "reharvest" button and a modal window pops up to confirm the action. This isn't possible to do in puppeteer cleanly, as puppeteer loads before the modal js can finish loading. The workaround for this has been to click the reharvest button and trigger a page reload via `page.reload()`. This works because we are accessing the page before the modal js can create an artificial barrier to the user carrying out the reharvest action.
 
 On certain views, an admin toolbar is present. This appears to only be visible for super admins and interfere's with being able to properly interrogate screenshots for discrepencies. To remedy this, the script `close-admin-toolbar.js` has been created to manage this on views where it pops up.
 
