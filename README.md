@@ -73,6 +73,23 @@ In order to ensure that tests are based on consistent data and therefore consist
 - `npm run setup:harvest`: Creates a harvest source using the [mock harvest source](https://github.com/alphagov/ckan-mock-harvest-sources) URL and triggers the source to generate a dataset with a series of resources
 - `npm run setup:publisher`: Creates an organogram dataset aka: a dataset with it's schema/vocabulary set to one of the 2 "organisation structure" options, and 2 resources: one without a source specified and one with. This is done due to a seperate view being produced in the edit resource page if the dataset it's being built for is an organogram dataset.
 
+## Debugging issues in the code
+Because a lot of the code in this repo is abstracted by puppeteer running a headless browser instance, as well as relying on a local instance of docker-ckan running alongside, debugging issues can be difficult. If you encounter issues whilst running or developing upon this repo, I recommend trying out the following:
+
+- Look at the Gotchas section below.
+
+It could be that the issue you're encountering has already been captured and explored.
+
+- Use puppeteer's screenshot functionality.
+
+```
+await page.screenshot({path: 'screenshot.png'});
+```
+
+In the above example, puppeteer will take a screenshot of the current instance of puppeteer and outputs it to `screenshot.png` at the root of your local repo. You can change the output location to whatever you want and put this line virtually anywhere in this code and it'll be valid. This will give you a representation of puppeteer's state at any one time compared to what you're expecting.
+
+If you do find an issue, please either create a pull request or add it to the gotchas below.
+
 ## Gotchas
 In scenarios that involve submitting a form to test for form errors, the ideal would be to use `form.submit()` in line with the browser API. Unfortuantely, ckan's `basic-form` js module hijacks the form submission flow, meaning that the submit button for that form has to be explicitly clicked. This can still be done via puppeteer, however it's not especially neat.
 
