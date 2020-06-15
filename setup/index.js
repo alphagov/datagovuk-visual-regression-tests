@@ -39,7 +39,7 @@ const organogram = require('./organogram');
     } catch(e) {
         // This and the browser.close() statement below, outside the try catch, ensure that the puppeteer session always ends. Otherwise the cli will hang until it times out, eating into machine memory
         await browser.close();
-        throw new Error(e);
+        console.log(e);
     }
 
     await browser.close();
