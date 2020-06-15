@@ -7,6 +7,7 @@ module.exports = async (page, scenario, label) => {
         page.goto(`${process.env.DOMAIN}/user/login`),
         page.waitForNavigation()
     ]);
+
     await page.focus('#field-login');
     await page.keyboard.type(process.env.CKAN_USER);
     await page.focus('#field-password');
@@ -16,11 +17,17 @@ module.exports = async (page, scenario, label) => {
         page.waitForNavigation()
     ]);
 
-    console.log(`Scenario ${label} logged in successfully. Going to page...`);
+    const cookies = await page.cookies();
 
-    // Go to scenario URL after login
-    await Promise.all([
-        page.goto(scenario.url),
-        page.waitForNavigation()
-    ]);
+    if(cookies.find(cookie => cookie.name === 'ckan') !== undefined) {
+        console.log(`Scenario ${label} logged in successfully. Going to page...`);
+
+        // Go to scenario URL after login
+        await Promise.all([
+            page.goto(scenario.url),
+            page.waitForNavigation()
+        ]);
+    } else {
+        throw new Error(`Login failed for ${label}. Please ensure that the credentials in your .env are correct or that your local ckan instance is running properly.`);
+    }
 };
