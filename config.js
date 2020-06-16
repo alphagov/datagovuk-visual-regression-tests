@@ -53,7 +53,7 @@ module.exports = {
     { "label": "User - default", "url": `${process.env.DOMAIN}/user`, "closeAdminToolbar": true },
     { "label": "User - view datasets", "url": `${process.env.DOMAIN}/user/default`, "closeAdminToolbar": true },
     { "label": "User - view activity", "url": `${process.env.DOMAIN}/user/activity/default`, "closeAdminToolbar": true },
-    { "label": "User - edit user", "url": `${process.env.DOMAIN}/user/edit/default` },
+    { "label": "User - edit user", "url": `${process.env.DOMAIN}/user/edit/default`, "closeAdminToolbar": true },
     { "label": "User - login", "url": `${process.env.DOMAIN}/user/login`, "skipLogin": true, "closeAdminToolbar": true },
     { "label": "User - login: user already logged in", "url": `${process.env.DOMAIN}/user/login`, "closeAdminToolbar": true },
     { "label": "User - logged out", "url": `${process.env.DOMAIN}/user/logged_out_redirect`, "skipLogin": true, "closeAdminToolbar": true },
