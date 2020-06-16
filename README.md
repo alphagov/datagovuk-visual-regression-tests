@@ -34,13 +34,14 @@ npm run approve
 
 Now you can happily change your local apps and run tests (with `npm run test`) to make sure you've not broken things! Every time you make a positive change, simply run `npm run approve` to update your reference screenshots.
 
-Running the default `test` command will run 37 scenarios, each one with 3 views (desktop, tablet and phone), amounting to 111 screenshots. This will take a while to run all of these and may start eating into your machine's memory in a non-trivial way. To subvert this, scenarios are broken down into the following sections:
+Running the default `test` command will trigger 40 scenarios, each one with 3 views (desktop, tablet and phone), totalling to 120 tests. This will take a while to run all of these and may start eating into your machine's memory in a non-trivial way. To subvert this, scenarios are broken down into the following sections:
 
 - homepage - 1 scenario
 - dataset - 11 scenarios
 - publisher - 5 scenarios
 - harvest - 9 scenarios
 - user - 8 scenarios
+- dashboard - 3 scenarios
 - admin - 3 scenarios
 
 You can use these section keywords to only target specific scenarios using the command `npm run test:[keyword]`. For example, to only test the harvest section, simply run `npm run test:harvest` to only run those 9 scenarios. You can similarly target a single scenario or however many you want by passing the `filter` flag with some targetting regex for the scenario label(s) directly to the `test` script, like so:

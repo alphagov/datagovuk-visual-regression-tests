@@ -10,6 +10,7 @@
     "test:publisher": "npm test -- --filter=Publisher - .*",
     "test:harvest": "npm test -- --filter=Harvest - .*",
     "test:user": "npm test -- --filter=User - .*",
+    "test:dashboard": "npm test -- --filter=Dashboard - .*",
     "test:admin": "npm test -- --filter=Admin - .*",
     "setup": "node setup/index.js all",
     "setup:publisher": "node setup/index.js publisher",
