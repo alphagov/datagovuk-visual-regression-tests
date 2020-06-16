@@ -4,7 +4,18 @@
   "description": "Visual regression testing app with login for the data.gov.uk",
   "scripts": {
     "approve": "backstop approve --configPath=config.js",
-    "test": "backstop test --configPath=config.js"
+    "test": "backstop test --configPath=config.js",
+    "test:homepage": "npm test -- --filter=Homepage - .*",
+    "test:dataset": "npm test -- --filter=Dataset - .*",
+    "test:publisher": "npm test -- --filter=Publisher - .*",
+    "test:harvest": "npm test -- --filter=Harvest - .*",
+    "test:user": "npm test -- --filter=User - .*",
+    "test:dashboard": "npm test -- --filter=Dashboard - .*",
+    "test:admin": "npm test -- --filter=Admin - .*",
+    "setup": "node setup/index.js all",
+    "setup:publisher": "node setup/index.js publisher",
+    "setup:harvest": "node setup/index.js harvest",
+    "setup:organogram": "node setup/index.js organogram"
   },
   "repository": {
     "type": "git",
@@ -17,6 +28,9 @@
   },
   "homepage": "https://github.com/alphagov/digitalmarketplace-visual-regression#readme",
   "devDependencies": {
-    "backstopjs": "^4.5.0"
-  }
+    "backstopjs": "^5.0.1",
+    "dotenv": "^8.2.0",
+    "puppeteer": "^3.2.0"
+  },
+  "dependencies": {}
 }
