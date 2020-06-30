@@ -19,7 +19,7 @@ module.exports = async (page, scenario, label) => {
 
     const cookies = await page.cookies();
 
-    if(cookies.find(cookie => cookie.name === 'ckan') !== undefined) {
+    if(cookies.find(cookie => cookie.name === 'auth_tkt') !== undefined) {
         console.log(`Scenario ${label} logged in successfully. Going to page...`);
 
         // Go to scenario URL after login
