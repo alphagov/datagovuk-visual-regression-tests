@@ -6,22 +6,28 @@ const updateEnv = require('./utils/update-env');
 module.exports = async page => {
     console.log('Creating a mock harvest source...');
 
-    if (await testPublisherStatus(page) === 404) {
+    const harvestSource = {
+        url: 'http://static-mock-harvest-source:11088',
+        name: 'Example Harvest #1',
+        slug: 'example-harvest-1'
+    };
+
+    if (await testPublisherStatus(page, 'test-publisher-1') === 404) {
         throw new Error('Cannot find publisher in your specified domain and therefore cannot create harvest source. Please create or generate a publisher before running the harvest source setup script.');
     }
 
-    if (await testHarvestStatus(page) === 404) {
+    if (await testHarvestStatus(page, harvestSource.slug) === 404) {
         await Promise.all([
             page.goto(`${process.env.DOMAIN}/harvest/new`),
             page.waitForNavigation() 
         ]);
 
-        await page.evaluate(() => {
-            document.getElementById('field-url').value = 'https://ckan-static-mock-harvest-source.cloudapps.digital/';
-            document.getElementById('field-title').value = 'Mock harvest source';
-            document.getElementById('field-name').value = 'mock-harvest-source';
-            document.getElementById('field-notes').value = 'Mock harvest source';
-        });
+        await page.evaluate(harvestSource => {
+            document.getElementById('field-url').value = harvestSource.url;
+            document.getElementById('field-title').value = harvestSource.name;
+            document.getElementById('field-name').value = harvestSource.slug;
+            document.getElementById('field-notes').value = harvestSource.name;
+        }, harvestSource);
 
         await Promise.all([
             page.click('button[type="submit"]'),
@@ -30,7 +36,7 @@ module.exports = async page => {
 
         console.log('Checking successful mock harvest source generation...');
 
-        if (await testHarvestStatus(page) === 200) {
+        if (await testHarvestStatus(page, harvestSource.slug) === 200) {
             console.log('Mock harvest source created successfully!');
         } else {
             throw new Error('Unable to verify existence of mock harvest source after automated creation. Please check that your local instance of docker-ckan is running properly and try again.');
@@ -42,9 +48,9 @@ module.exports = async page => {
 
     console.log('Triggering harvest job...');
 
-    if (await testDatasetStatus(page) === 404) {
+    if (await testDatasetStatus(page, 'example-dataset-number-one') === 404) {
         await Promise.all([
-            page.goto(`${process.env.DOMAIN}/harvest/admin/mock-harvest-source`),
+            page.goto(`${process.env.DOMAIN}/harvest/admin/${harvestSource.slug}`),
             page.waitForNavigation() 
         ]);
     
@@ -53,7 +59,7 @@ module.exports = async page => {
     
         console.log('Checking successful harvest job trigger...');
     
-        if (await testDatasetStatus(page) === 200) {
+        if (await testDatasetStatus(page, 'example-dataset-number-one') === 200) {
             console.log('Harvest source triggered successfully!');
         } else {
             throw new Error('Unable to verify that mock harvest source job was triggered. Please check that your local instance of docker-ckan is running properly and try again.');
