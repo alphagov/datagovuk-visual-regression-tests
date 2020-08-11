@@ -13,7 +13,7 @@ module.exports = async page => {
         datasetContact: 'Example User'
     };
 
-    if (await testPublisherStatus(page, 'test-publisher-1') === 404) {
+    if (await testPublisherStatus(page, 'example-publisher-1') === 404) {
         throw new Error('Cannot find publisher in your specified domain and therefore cannot create harvest source. Please create or generate a publisher before running the harvest source setup script.');
     }
 

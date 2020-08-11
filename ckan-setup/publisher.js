@@ -5,13 +5,13 @@ module.exports = async page => {
 
     const publisherList = [
         {
-            name: 'Test Publisher #1',
-            slug: 'test-publisher-1',
+            name: 'Example Publisher #1',
+            slug: 'example-publisher-1',
             isCharity: true
         },
         {
-            name: 'Test Publisher #2',
-            slug: 'test-publisher-2',
+            name: 'Example Publisher #2',
+            slug: 'example-publisher-2',
             isCharity: false
         },
     ];
