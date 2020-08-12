@@ -7,7 +7,7 @@ module.exports = async page => {
     console.log('Creating a mock harvest source...');
 
     const harvestSource = {
-        url: 'http://static-mock-harvest-source:11088',
+        url: `http://static-mock-harvest-source${process.env.CKAN_VERSION === '2.8' && '-2.8'}:11088`,
         name: 'Example Harvest #1',
         slug: 'example-harvest-1',
         datasetContact: 'Example User'
