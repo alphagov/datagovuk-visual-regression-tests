@@ -8,7 +8,8 @@
     "setup": "node ckan-setup/index.js all",
     "setup:publisher": "node ckan-setup/index.js publisher",
     "setup:harvest": "node ckan-setup/index.js harvest",
-    "setup:organogram": "node ckan-setup/index.js organogram"
+    "setup:organogram": "node ckan-setup/index.js organogram",
+    "update-resource-ids": "node update-resource-ids.js"
   },
   "repository": {
     "type": "git",

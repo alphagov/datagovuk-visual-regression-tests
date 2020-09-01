@@ -85,7 +85,13 @@ If you are unable to do this, this repo includes an equivalent data setup. This 
 - `npm run setup:harvest`: Creates a harvest source using the [mock harvest source](https://github.com/alphagov/ckan-mock-harvest-sources) URL and triggers the source to generate 2 datasets with a series of resources
 - `npm run setup:organogram`: Creates an organogram dataset aka: a dataset with it's schema/vocabulary set to one of the 2 "organisation structure" options, and 2 resources: one without a source specified and one with. This is done due to a seperate view being produced in the edit resource page if the dataset it's being built for is an organogram dataset.
 
-As part of the setup script, the env variables `STANDARD_RESOURCE`, `ORGANOGRAM_RESOURCE_NO_SOURCE` and `ORGANOGRAM_RESOURCE_SOURCE_SPECIFIED` will be auto generated. Please note that if you have already populated these env variables, that they will be overwritten by the script.
+As part of the setup script, the env variables `STANDARD_RESOURCE`, `ORGANOGRAM_RESOURCE_NO_SOURCE` and `ORGANOGRAM_RESOURCE_SOURCE_SPECIFIED` will be auto generated. You can also run this function as a standalone command by running:
+
+```
+npm run update-resource-id
+```
+
+You can pass either `organogram` or `default` to run only the organogram or the standard resource generations respectively. Please note that if you have already populated these env variables, that they will be overwritten by this script.
 
 ## Debugging issues in the code
 Because a lot of the code in this repo is abstracted by puppeteer running a headless browser instance, as well as relying on an instance of docker-ckan running alongside, debugging issues can be difficult. If you encounter issues whilst running or developing upon this repo, it is recommended that you try the following:

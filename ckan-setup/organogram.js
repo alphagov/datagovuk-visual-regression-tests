@@ -70,15 +70,9 @@ module.exports = async page => {
         console.log('Organogram dataset and resources already exist! Skipping dataset generation');
     }
 
-    console.log('Retreiving ids of organogram dataset resources... These will be written to your .env file.');
+    console.log('Retrieving ids of organogram dataset resources... These will be written to your .env file.');
 
-    await Promise.all([
-        page.goto(`${process.env.DOMAIN}/dataset/${organogramData.slug}`),
-        page.waitForNavigation()
-    ]);
-
-    const ids = await page.evaluate(() => [...document.querySelectorAll('.resource-item')].map(resource => resource.dataset.id));
-    await updateEnv(ids, ['ORGANOGRAM_RESOURCE_NO_SOURCE', 'ORGANOGRAM_RESOURCE_SOURCE_SPECIFIED']);
+    await updateEnv(page, "organogram");
 
     console.log('.env file updated with ids of organogram resources. Organogram dataset setup is complete!');
 }

@@ -87,10 +87,9 @@ module.exports = async page => {
 
     console.log('Dataset contact details updated!');
 
-    console.log('Retreiving id of first dataset resource... These will be written to your .env file.');
+    console.log('Retrieving id of first dataset resource... These will be written to your .env file.');
 
-    const resourceId = await page.evaluate(() => document.querySelector('.resource-item').dataset.id);
-    await updateEnv([resourceId], ['STANDARD_RESOURCE']);
+    await updateEnv(page, "default");
 
     console.log('.env file updated with the resource id. Harvest setup is complete!');
 }
