@@ -18,9 +18,9 @@ Clone the `.env.example` file and create a `.env` file at the root of your local
 It's recommended that you run the VRT against a blank environment with only specified test data. See the data setup section below for more details including instructions on how to setup test data locally. If you run this against a populated environment, filling in the necessary env variables, then the VRT will still run as expected but it will "fail" as it isn't running against the data that it has been approved against and is therefore expecting. This isn't a problem if you just want to check specific features manually but can be an issue if you want to update the tests.
 
 ## How it works
-BackstopJS compares an intance of ckan that you specify in the .env file, uses puppeteer to run that instance through a set of scenarios aka: views within the ckan user journey and variations of those views, and compares screenshots taken from those scenarios to existing screenshots stored in source control. Backstop will then produce a html report for interrogation, making use of puppeteer's rich diff functionality. You as the dev working on a feature or bugfix can then assess if any changes produced are acceptable or not and approve these changes, updating the screenshots in source control.
+BackstopJS compares an instance of ckan that you specify in the .env file, uses puppeteer to run that instance through a set of scenarios aka: views within the ckan user journey and variations of those views, and compares screenshots taken from those scenarios to existing screenshots stored in source control. Backstop will then produce a html report for interrogation, making use of puppeteer's rich diff functionality. You as the dev working on a feature or bugfix can then assess if any changes produced are acceptable or not and approve these changes, updating the screenshots in source control.
 
-The original intent of these tests was to assess changes between versions of ckan to ensure that the admin frontend hadn't broken when upgrading. This however has evolved as we start to think about ways to integreate this testing suite into a consistent CI flow.
+The original intent of these tests was to assess changes between versions of ckan to ensure that the admin frontend hadn't broken when upgrading. This however has evolved as we start to think about ways to integrate this testing suite into a consistent CI flow.
 
 If these admin journeys change at any point, the scenarios in this tool will need to be reviewed.
 
@@ -37,7 +37,7 @@ npm run approve
 This will update your saved screenshots to the most recently run tests. Remember you still have to commit these changes to source control. Every time you make a positive change, simply run `npm run test` to ensure visual fidelity and then `npm run approve` to update your reference screenshots.
 
 ### Different ckan versions and view filters
-This repo includes mutliple scenario "sets" for different version of ckan. Currently, this includes a set of screenshots for ckan 2.8 and for 2.7. By default, running `test` will use the config for 2.7. To use a different config, for example 2.8, just pass this as an argument:
+This repo includes multiple scenario "sets" for different version of ckan. Currently, this includes a set of screenshots for ckan 2.8 and for 2.7. By default, running `test` will use the config for 2.7. To use a different config, for example 2.8, just pass this as an argument:
 
 ```
 npm run test 2.8
@@ -55,7 +55,7 @@ Running the default `test` against any ckan config currently command will trigge
 - dashboard - 3 scenarios
 - admin - 3 scenarios
 
-You can use these section keywords to only target specific scenarios using the command `npm run test [config] [keyword]`. For example, to only test the harvest section for ckan 2.7, simply run `npm run test 2.7 harvest` to only run those 9 scenarios for 2.7. You can similarly target a single scenario or however many you want by passing the `filter` flag with some targetting regex for the scenario label(s) directly to the `test` script, like so:
+You can use these section keywords to only target specific scenarios using the command `npm run test [config] [keyword]`. For example, to only test the harvest section for ckan 2.7, simply run `npm run test 2.7 harvest` to only run those 9 scenarios for 2.7. You can similarly target a single scenario or however many you want by passing the `filter` flag with some targeting regex for the scenario label(s) directly to the `test` script, like so:
 
 For running ckan locally, it is recommended you use the [docker-ckan project](https://github.com/alphagov/docker-ckan). Please see the documentation for that project for details on how to run ckan locally via docker.
 
@@ -83,7 +83,7 @@ If you are unable to do this, this repo includes an equivalent data setup. This 
 
 - `npm run setup:publisher`: Creates 2 test publishers
 - `npm run setup:harvest`: Creates a harvest source using the [mock harvest source](https://github.com/alphagov/ckan-mock-harvest-sources) URL and triggers the source to generate 2 datasets with a series of resources
-- `npm run setup:organogram`: Creates an organogram dataset aka: a dataset with it's schema/vocabulary set to one of the 2 "organisation structure" options, and 2 resources: one without a source specified and one with. This is done due to a seperate view being produced in the edit resource page if the dataset it's being built for is an organogram dataset.
+- `npm run setup:organogram`: Creates an organogram dataset aka: a dataset with it's schema/vocabulary set to one of the 2 "organisation structure" options, and 2 resources: one without a source specified and one with. This is done due to a separate view being produced in the edit resource page if the dataset it's being built for is an organogram dataset. **Please note:** The organogram datasets produced by this script aren't included in the datagovuk test data, however it is required to run the VRT. It is therefore recommended that even if you're able to run the above commands from datagovuk, you at least run this command specifically.
 
 As part of the setup script, the env variables `STANDARD_RESOURCE`, `ORGANOGRAM_RESOURCE_NO_SOURCE` and `ORGANOGRAM_RESOURCE_SOURCE_SPECIFIED` will be auto generated. You can also run this function as a standalone command by running:
 
@@ -112,14 +112,13 @@ If you do find an issue, please create a pull request to either fix the issue or
 
 ## Gotchas
 ### Issues with ckan
-- In ckan scenarios that involve submitting a form to test for form errors, the ideal would be to use `form.submit()` in line with the browser API. Unfortuantely, ckan's `basic-form` js module hijacks the form submission flow, meaning that the submit button for that form has to be explicitly clicked. This can still be done via puppeteer, however it's not especially neat.
+- In ckan scenarios that involve submitting a form to test for form errors, the ideal would be to use `form.submit()` in line with the browser API. Unfortunately, ckan's `basic-form` js module hijacks the form submission flow, meaning that the submit button for that form has to be explicitly clicked. This can still be done via puppeteer, however it's not especially neat.
 - On any view with an upload field, notably the organogram resource views, ckan's `image-upload` js module takes a little while to load and puppeteer manages to beat it 9 times out of 10. The `upload-field.js` script has therefore been added to wait for the js to load.
 - Similar to the above around having to wait for js to load in a view, some forms have an autofill slug field, managed by ckan's `slug-preview` module. This both hides one field and generates markup for a non-input field which auto-updates based on an associated input field. Like above, puppeteer beats the rendering work for this 9 times out of 10, creating inconsistent view tests. The `slug-preview.js` script exists to account for this.
 - When triggering a harvest job, in the user UI, the user clicks the "reharvest" button and a modal window pops up to confirm the action. This isn't possible to do in puppeteer cleanly, as puppeteer loads before the modal js can finish loading. The workaround for this has been to click the reharvest button and trigger a page reload via `page.reload()`. This works because we are accessing the page before the modal js can create an artificial barrier to the user carrying out the reharvest action.
-- On certain views, an admin toolbar is present. This appears to only be visible for super admins and interfere's with being able to properly interrogate screenshots for discrepencies. To remedy this, the script `close-admin-toolbar.js` has been created to manage this on views where it pops up.
 - Backstop has the option to ignore portions of html that we don't want to include in tests eg: fields that relate to times that will be constantly changing. Unfortunately this is very difficult to police in our ckan instances currently as we use a mix of markup from our own extension and default ckan admin panel markup, making it a near impossible job to apply selectors to all unwanted fields across the ckan admin panel.
 
 ### Backstop limitations
-- Backstop doesn't have a testing library for IE or Edge. The reason for this is that backstop relies on the headless infrastructure provided by engines like puppeteer or caspar, something that old microsoft browsers don't suppert. We have a need to support IE11 at least for this project, so you may need to do some additional manual testing on top of running these tests.
-- Backstop can't ignore dynamic data. This creates 2 problems: firstly that the VRT needs to be run against a completely clean instance, with the exception of the specified test data, and secondly that dates or auto-generated ids can't be reliably ignored (see above point re: ignoring selectors through backstop). This means that a portion of tests can always potentially fail.
+- Backstop doesn't have a testing library for IE or Edge. The reason for this is that backstop relies on the headless infrastructure provided by engines like puppeteer or caspar, something that old microsoft browsers don't support. We have a need to support IE11 at least for this project, so you may need to do some additional manual testing on top of running these tests.
+- Backstop can only run against a very specific stack. If any additional data is added, because Backstop explicitly tests against visual discrepancy, then tests will fail. This means that if any additional data is added to a local stack or anything is changed, either said data will need to be removed or you will have to reset your local stack.
 - Backstop storing screenshots in source control is potentially problematic. A single set of ckan scenarios (120 screenshots) comes to approximately 15MB. A long term solution needs ot be considered for how we store scenarios to avoid taking up obscene amounts of space in source control.
