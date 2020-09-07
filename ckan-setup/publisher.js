@@ -28,7 +28,6 @@ module.exports = async page => {
             await page.evaluate(pubData => {
                 document.getElementById('field-name').value = pubData.name;
                 document.getElementById('field-url').value = pubData.slug;
-                document.getElementById('field-description').value = pubData.name;
 
                 if (pubData.isCharity) {
                     document.getElementById('category').value = 'charity-ngo';
