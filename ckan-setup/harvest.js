@@ -27,7 +27,7 @@ module.exports = async page => {
             document.getElementById('field-url').value = harvestSource.url;
             document.getElementById('field-title').value = harvestSource.name;
             document.getElementById('field-name').value = harvestSource.slug;
-            document.getElementById('field-notes').value = harvestSource.name;
+            document.getElementById('field-notes').value = "An example harvest source";
         }, harvestSource);
 
         await Promise.all([
