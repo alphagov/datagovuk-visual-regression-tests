@@ -1,6 +1,5 @@
 require('dotenv').config();
 const login = require('./utils/login');
-const closeAdminToolbar = require('./utils/close-admin-toolbar');
 const submitForm = require('./utils/submit-form');
 const uploadField = require('./utils/upload-field');
 const slugPreview = require('./utils/slug-preview');
@@ -14,10 +13,6 @@ module.exports = async (page, scenario, vp) => {
         await login(page, scenario, label);
     } else {
         console.log(`Login will be skipped for scenario ${label}`);
-    }
-
-    if (scenario.closeAdminToolbar) {
-        await closeAdminToolbar(page);
     }
 
     if (scenario.submitForm) {

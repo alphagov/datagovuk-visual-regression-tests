@@ -6,7 +6,6 @@ const getStatus = async (page, route) => {
     return response.status();
 }
 
-exports.publisher = async page => await getStatus(page, 'publisher/test-publisher');
-exports.harvest = async page => await getStatus(page, 'harvest/mock-harvest-source');
-exports.datasetStandard = async page => await getStatus(page, 'dataset/example-dataset-number-one');
-exports.datasetOrganogram = async page => await getStatus(page, 'dataset/organogram-test');
+exports.publisher = async (page, route) => await getStatus(page, `publisher/${route}`);
+exports.harvest = async (page, route) => await getStatus(page, `harvest/${route}`);
+exports.dataset = async (page, route) => await getStatus(page, `dataset/${route}`);
