@@ -1,5 +1,6 @@
 require('dotenv').config();
 const login = require('./utils/login');
+const removeDebugConsole = require('./utils/remove-debug-console');
 const submitForm = require('./utils/submit-form');
 const uploadField = require('./utils/upload-field');
 const slugPreview = require('./utils/slug-preview');
@@ -14,6 +15,8 @@ module.exports = async (page, scenario, vp) => {
     } else {
         console.log(`Login will be skipped for scenario ${label}`);
     }
+
+    await removeDebugConsole(page);
 
     if (scenario.submitForm) {
         await submitForm(page, label);
