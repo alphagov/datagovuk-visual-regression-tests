@@ -5,10 +5,7 @@
   "scripts": {
     "test": "node test.js",
     "approve": "node approve.js",
-    "setup": "node ckan-setup/index.js all",
-    "setup:publisher": "node ckan-setup/index.js publisher",
-    "setup:harvest": "node ckan-setup/index.js harvest",
-    "setup:organogram": "node ckan-setup/index.js organogram",
+    "setup": "node ckan-setup/index.js",
     "update-resource-ids": "node update-resource-ids.js"
   },
   "repository": {
