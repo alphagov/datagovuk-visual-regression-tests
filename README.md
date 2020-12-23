@@ -39,7 +39,7 @@ Either of these scripts will ensure that your local VRT is synced up with the da
 npm run test
 ```
 
-With the basic setup as supplied, this will run an initial test on the domain specified in your .env file. By default, this will run against screenshots stored for ckan version 2.7. You can see the report by opening `backstop_data/html_report/index.html` in your browser. If there are any changes between the instance you are running and the stored screenshots then these tests will fail, showing diffs in the produced report. If you want to update these screenshots to the most recently run test screenshots, you can run:
+With the basic setup as supplied, this will run an initial test on the domain specified in your .env file. By default, this will run against screenshots stored for ckan version 2.8. You can see the report by opening `backstop_data/html_report/index.html` in your browser. If there are any changes between the instance you are running and the stored screenshots then these tests will fail, showing diffs in the produced report. If you want to update these screenshots to the most recently run test screenshots, you can run:
 
 ```
 npm run approve
@@ -48,13 +48,13 @@ npm run approve
 This will update your saved screenshots to the most recently run tests. Remember you still have to commit these changes to source control. Every time you make a positive change, simply run `npm run test` to ensure visual fidelity and then `npm run approve` to update your reference screenshots.
 
 ### Different ckan versions and view filters
-This repo includes multiple scenario "sets" for different version of ckan. Currently, this includes a set of screenshots for ckan 2.9, 2.8 and 2.7. By default, running `test` will use the config for 2.7. To use a different config, for example 2.8, just pass this as an argument:
+This repo includes multiple scenario "sets" for different version of ckan. Currently, this includes a set of screenshots for ckan 2.9, 2.8 and 2.7. By default, running `test` will use the config for 2.8 as this is the version currently running in production. To use a different config, for example 2.9, just pass this as an argument:
 
 ```
-npm run test 2.8
+npm run test 2.9
 ```
 
-This will run your local instance against ckan 2.8 instead of 2.7. Remember that your .env file needs to reflect the scenario set that you are testing eg: Don't run a local version of 2.8 against the 2.7 scenarios (unless this is explicitly what you want to do, in which case do not approve these changes as they will override the existing 2.7 scenario set).
+This will run your local instance against ckan 2.9 instead of 2.8. Remember that your .env file needs to reflect the scenario set that you are testing eg: Don't run a local version of 2.9 against the 2.8 scenarios (unless this is explicitly what you want to do, in which case do not approve these changes as they will override the existing 2.8 scenario set).
 
 Running the default `test` against any ckan config currently command will trigger 40 scenarios, each one with 3 views (desktop, tablet and phone), totalling to 120 tests. This will take a while to run all of these and may start eating into your machine's memory in a non-trivial way. To subvert this, scenarios are broken down into the following sections:
 
@@ -91,7 +91,7 @@ In addition to the above, you can add the following additional attributes depend
 
 Make sure to review the test report before approving to check that no unwanted changes have slipped in.
 
-If you want to add a new scenario set, you can add a new config root under the `configs` directory. If you are adding a new ckan version, it is recommended that you follow the setup in the other ckan config roots (currently `2.7.js` and `2.8.js`) and reference `ckan-config.js` as they do. If you are adding a completely new set of scenarios relating to datagovuk but unrelated to the ckan admin panel, you will need to create an entirely new config. You can use `ckan-config.js` as a basis for your config. If you want to use filters in your new scenario, it is recommended that you edit `test.js` and amend the code to properly catch your filter.
+If you want to add a new scenario set, you can add a new config root under the `configs` directory. If you are adding a new ckan version, it is recommended that you follow the setup in the other ckan config roots (currently `2.7.js`, `2.8.js` and `2.9.js`) and reference `ckan-config.js` as they do. If you are adding a completely new set of scenarios relating to datagovuk but unrelated to the ckan admin panel, you will need to create an entirely new config. You can use `ckan-config.js` as a basis for your config. If you want to use filters in your new scenario, it is recommended that you edit `test.js` and amend the code to properly catch your filter.
 
 ## Ckan data setup
 In order to ensure that tests are based on consistent data and therefore consistent views, the tests in this repo are based on [datagovuk's test data setup](https://github.com/alphagov/ckanext-datagovuk#creating-test-data). You can run the commands specified in the documentation for ckanext-datagovuk from within the ckan image of the docker-ckan stack.
@@ -130,5 +130,4 @@ If you do find an issue, please create a pull request to either fix the issue or
 ### Backstop limitations
 - Backstop doesn't have a testing library for IE or Edge. The reason for this is that backstop relies on the headless infrastructure provided by engines like puppeteer or caspar, something that old microsoft browsers don't support. We have a need to support IE11 at least for this project, so you may need to do some additional manual testing on top of running these tests.
 - Backstop can only run against a very specific stack. If any additional data is added, because Backstop explicitly tests against visual discrepancy, then tests will fail. This means that if any additional data is added to a local stack or anything is changed, either said data will need to be removed or you will have to reset your local stack.
-- The reference image `User_-_view_activity_0_document_0_phone` has a issue with variable spacing across different devices. This means that this test specifically may unexpectedly fail during testing. Please be conscious of this when updating and running tests.
 - Backstop storing screenshots in source control is potentially problematic. A single set of ckan scenarios (120 screenshots) comes to approximately 15MB. A long term solution needs ot be considered for how we store scenarios to avoid taking up obscene amounts of space in source control.
