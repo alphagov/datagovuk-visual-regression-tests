@@ -6,6 +6,6 @@ const getStatus = async (page, route) => {
     return response.status();
 }
 
-exports.publisher = async (page, route) => await getStatus(page, `publisher/${route}`);
+exports.publisher = async (page, route) => await getStatus(page, `${process.env.CKAN_VERSION === "2.9" ? "organization" : "publisher"}/${route}`);
 exports.harvest = async (page, route) => await getStatus(page, `harvest/${route}`);
 exports.dataset = async (page, route) => await getStatus(page, `dataset/${route}`);
