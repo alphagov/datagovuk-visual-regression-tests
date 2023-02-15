@@ -22,7 +22,7 @@ module.exports = async page => {
             document.getElementById('field-notes').value = organogramData.name;
 
             const schemaDropdown = document.getElementById('field-schema-vocabulary');
-            schemaDropdown.value = [...schemaDropdown.options].find(opt => opt.text.indexOf('Organisation structure') !== -1).value;
+            schemaDropdown.value = [...schemaDropdown.options].find(opt => opt.text.indexOf('Organisation structure including senior roles') !== -1).value;
         }, organogramData);
 
         await Promise.all([
@@ -30,29 +30,15 @@ module.exports = async page => {
             page.waitForNavigation()
         ]);
 
-        console.log('Adding resource without a source...');
-
-        await page.evaluate(() => {
-            document.getElementById('field-name').value = 'No source';
-        });
-
-        await Promise.all([
-            page.click('button[value="again"]'),
-            page.waitForNavigation()
-        ]);
-
         console.log('Adding resource with a source...');
 
         await waitForOrganogramJS(page);
 
-        await page.evaluate(() => {
-            document.getElementById('field-name').value = 'Source specified';
-            document.getElementById('field-image-url').value = 'https://ckan-static-mock-harvest-source.cloudapps.digital/mock-third-party/example-dataset-1/all-categories-summary.csv';
-        });
-
-        await page.click('.select2-choice');
-        await page.keyboard.type('csv');
-        await page.keyboard.press('Enter');
+        console.log('Uploading organogram xls file...');
+        // download latest sample organogram xls here - https://github.com/alphagov/ckanext-datagovuk/blob/main/tests/data/sample-valid.xls
+        const fileInput = await page.$('input[type=file]');
+        const filePath = "./ckan-setup/sample-valid.xls";
+        await fileInput.uploadFile(filePath);
 
         await Promise.all([
             page.click('button[value="go-metadata"]'),
