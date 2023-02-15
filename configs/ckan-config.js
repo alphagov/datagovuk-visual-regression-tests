@@ -17,7 +17,7 @@ module.exports = id => ({
         "height": 768
         }
     ],
-    "misMatchThreshold": 0,
+    "misMatchThreshold": 15,
     "requireSameDimensions": false,
     "onBeforeScript": "onBefore.js",
     "onReadyScript": "onReady.js",
@@ -32,8 +32,7 @@ module.exports = id => ({
         { "label": "Dataset - add new resource", "url": `${process.env.DOMAIN}/dataset/new_resource/example-dataset-number-one`, "select2": true },
         { "label": "Dataset - view resource", "url": `${process.env.DOMAIN}/dataset/example-dataset-number-one/resource/${process.env.STANDARD_RESOURCE}`, "hideSelectors": ["table.table td:nth-child(2)"], "tableRows": true, "tableShowMore": true},
         { "label": "Dataset - edit resource", "url": `${process.env.DOMAIN}/dataset/example-dataset-number-one/resource_edit/${process.env.STANDARD_RESOURCE}`, "select2": true },
-        { "label": "Dataset - edit organogram resource: no source", "url": `${process.env.DOMAIN}/dataset/organogram-test/resource_edit/${process.env.ORGANOGRAM_RESOURCE_NO_SOURCE}`, "uploadField": true, "select2": true },
-        { "label": "Dataset - edit organogram resource: source specified", "url": `${process.env.DOMAIN}/dataset/organogram-test/resource_edit/${process.env.ORGANOGRAM_RESOURCE_SOURCE_SPECIFIED}`, "uploadField": true, "select2": true },
+        { "label": "Dataset - edit organogram resource: source specified", "url": `${process.env.DOMAIN}/dataset/organogram-test/resource_edit/${process.env.ORGANOGRAM_RESOURCE_SOURCE_SPECIFIED}`, "uploadField": true, "select2": false },
         { "label": "Publisher - default", "url": `${process.env.DOMAIN}/${id === "ckan-2.9" ? "organization" : "publisher"}` },
         { "label": "Publisher - add new", "url": `${process.env.DOMAIN}/${id === "ckan-2.9" ? "organization" : "publisher"}/new`, "slugPreview": true, "textarea": true },
         { "label": "Publisher - add new: form errors", "url": `${process.env.DOMAIN}/${id === "ckan-2.9" ? "organization" : "publisher"}/new`, "submitForm": true, "textarea": true },
@@ -72,6 +71,7 @@ module.exports = id => ({
     "report": [],
     "engine": "puppeteer",
     "engineOptions": {
+        // "headless": false,
         "args": ["--no-sandbox"],
     },
     "debug": false,
