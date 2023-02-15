@@ -21,6 +21,6 @@
   "devDependencies": {
     "backstopjs": "^5.0.1",
     "dotenv": "^8.2.0",
-    "puppeteer": "^3.3.0"
+    "puppeteer": "^18.2.1"
   }
 }
